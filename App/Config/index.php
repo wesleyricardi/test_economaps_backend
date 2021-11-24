@@ -13,4 +13,4 @@ define("DATABASE_TYPE", "mysql");
 define("DATABASE_HOST", "localhost");
 define("DATABASE_NAME", "economapas_test");
 define("DATABASE_USER", "admin");
-define("DATABASE_PASS", "");
+define("DATABASE_PASS", "-");
