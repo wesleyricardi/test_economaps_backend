@@ -12,7 +12,7 @@ use App\Data\CRUD;
 class Groups {
     public static function readGroups() :object {
         try {
-            $groups = CRUD::Consult('SELECT * FROM `groups`', returnType: 'array');
+            $groups = CRUD::Consult('SELECT * FROM `groups` ORDER BY `creation_time` DESC', returnType: 'array');
 
             if($groups):
                 foreach($groups as $group) {
@@ -39,7 +39,7 @@ class Groups {
         try {
             CRUD::beginTransaction();
 
-            CRUD::Query('INSERT INTO `groups` (`name`) VALUES (?)', [$name]);
+            CRUD::Query('INSERT INTO `groups` (`name`, `creation_time`) VALUES (?, ?)', [$name, NOW_DATETIME]);
             $group = CRUD::Consult('SELECT `id` FROM `groups` WHERE `name` LIKE ?', [$name]);
             if($group) {
                 foreach($cities as $city) $insertValue[] = [$city, $group->id];
